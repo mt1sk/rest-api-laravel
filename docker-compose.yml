@@ -4,6 +4,7 @@ services:
 
     web:
         build: ./web
+        restart: always
         environment:
             - APACHE_RUN_USER=#1000
             - PHP_INI_SCAN_DIR=/usr/local/etc/php/conf.d/:/usr/local/etc/php/custom.d/

@@ -19,4 +19,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/register',  ['uses'=>'Api\RegisterController@register']);
+Route::group(['namespace'=>'Api'], function() {
+    Route::group(['namespace'=>'Auth'], function() {
+        Route::post('/register', ['uses' => 'RegisterController@register']);
+        Route::post('/login', ['uses' => 'LoginController@login']);
+        Route::post('/logout', ['uses' => 'LogoutController@logout'])->middleware('auth:api');
+    });
+});
