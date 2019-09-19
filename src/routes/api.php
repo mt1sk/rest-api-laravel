@@ -25,4 +25,14 @@ Route::group(['namespace'=>'Api'], function() {
         Route::post('/login', ['uses' => 'LoginController@login']);
         Route::post('/logout', ['uses' => 'LogoutController@logout'])->middleware('auth:api');
     });
+
+    /*Route::apiResource('posts', 'PostController');*/
+    Route::match(['GET', 'HEAD'], '/posts', ['uses'=>'PostController@index']);
+    Route::match(['GET', 'HEAD'], '/posts/{post}', ['uses'=>'PostController@show']);
+    Route::middleware(['auth:api'])->group(function () {
+        Route::post('/posts', ['uses'=>'PostController@store']);
+        Route::match(['PUT', 'PATCH'], '/posts/{post}', ['uses'=>'PostController@update'])->middleware('can:update-post,post');
+        Route::delete('/posts/{post}', ['uses'=>'PostController@destroy'])->middleware('can:delete-post,post');
+    });
+
 });
