@@ -7,6 +7,7 @@ use App\Http\Requests\Api\StoreCommentRequest;
 use App\Post;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Comment as CommentResource;
 
 class CommentController extends Controller
 {
@@ -34,7 +35,7 @@ class CommentController extends Controller
         $comment->user_id = $request->user()->id;
         $comment->save();
 
-        return response()->json(['success'=>true, 'data'=>$comment], 201);
+        return new CommentResource($comment);
     }
 
     /**
