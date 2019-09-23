@@ -66,8 +66,8 @@ class PostController extends Controller
      */
     public function update(UpdatePostRequest $request, Post $post)
     {
-        $post->title = $request->title;
-        $post->text = $request->text;
+        $post->title = $request->get('title', $post->title);
+        $post->text = $request->get('text', $post->text);
         $post->save();
 
         return new PostResource($post);
@@ -82,6 +82,6 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         $post->delete();
-        return response()->json(['success'=>true]);
+        return response(null, 204);
     }
 }

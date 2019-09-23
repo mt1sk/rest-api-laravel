@@ -31,7 +31,7 @@ Route::group(['namespace'=>'Api'], function() {
     Route::match(['GET', 'HEAD'], '/posts/{post}', ['uses'=>'PostController@show']);
     Route::middleware(['auth:api'])->group(function () {
         Route::post('/posts', ['uses'=>'PostController@store']);
-        Route::match(['PUT', 'PATCH'], '/posts/{post}', ['uses'=>'PostController@update'])->middleware('can:update-post,post');
+        Route::patch('/posts/{post}', ['uses'=>'PostController@update'])->middleware('can:update-post,post');
         Route::delete('/posts/{post}', ['uses'=>'PostController@destroy'])->middleware('can:delete-post,post');
 
         Route::post('/posts/{post}/comments', ['uses'=>'CommentController@store']);
