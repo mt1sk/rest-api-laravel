@@ -52,8 +52,10 @@ src/app/
 4. В админере создаем базу данных, [http://localhost:8080](http://localhost:8080)
 5. В папке ```src``` копируем файл ```.env.example``` -> ```.env``` и указываем настройки базы данных:
    - ```DB_HOST=db```
-   - ```DB_PORT``` и ```DB_PASSWORD``` берём из настроек docker-compose
+   - ```DB_PORT=3306```
+   - ```DB_PASSWORD``` берём из настроек docker-compose
    - ```DB_DATABASE``` прасваиваем созданное вами имя
 6. Заходим в докер контейнер ```web```: ```docker exec -it your_container_name bash```
    - генерируем ```APP_KEY```: ```php artisan key:generate```
    - выполняем миграции: ```php artisan migrate```
+   - выполняем настройку laravel passport: ```php artisan passport:install```
