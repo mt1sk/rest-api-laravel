@@ -10,6 +10,6 @@ class LogoutController extends Controller
     public function logout(Request $request)
     {
         $request->user()->token()->revoke();
-        return response()->json(['success'=>true]);
+        return response(null, 205);
     }
 }

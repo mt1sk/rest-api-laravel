@@ -17,6 +17,6 @@ class RegisterController extends Controller
         $user->password = Hash::make($request->password);
         $user->save();
 
-        return response()->json(['success'=>true, 'user'=>$user->toArray()], 201);
+        return response(null, 201);
     }
 }

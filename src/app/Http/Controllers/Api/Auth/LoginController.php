@@ -13,7 +13,7 @@ class LoginController extends Controller
     {
         $credentials = $request->only('email', 'password');
         if (!Auth::attempt($credentials)) {
-            return response()->json(['success'=>false, 'message'=>'Wrong credentials'], 401);
+            return response()->json(['message'=>'Wrong credentials'], 400);
         }
         $token = Auth::user()->createToken(config('app.name').', auto api auth.');
         $token->token->expires_at = Carbon::now()->addMonth();
@@ -24,6 +24,6 @@ class LoginController extends Controller
             'access_token' =>  $token->accessToken,
             'expires_at' => Carbon::parse($token->token->expires_at)->toDateTimeString(),
         ];
-        return response()->json(['success'=>true, 'token'=>$tokenResult]);
+        return response()->json(['token'=>$tokenResult]);
     }
 }
